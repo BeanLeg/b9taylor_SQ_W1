@@ -1,4 +1,4 @@
-# Side Quest Week 1: Exit 8
+# Side Quest Week 1: Exit 8 - He's Watching You
 
 ## Setup and Interaction Instructions
 
@@ -8,14 +8,12 @@ To play via GitHub Pages, visit the link provided on the submission page.
 
 **How to interact:**
 
-- Click anywhere on the canvas to draw a random-coloured circle at that position.
-- Press **k** to log the current mouse coordinates to the Chrome console (useful for positioning shapes).
+- Click anywhere on the canvas to draw a watchful eye at that position.
 
 ## Assets
 
 | File | Source |
-|------|--------|
-| `assets/images/controller.png` | Drawn by Karen Cochrane |
+| `creepyman.png` | https://www.rockpapershotgun.com/the-exit-8-perfectly-captures-the-surreal-horror-of-navigating-a-busy-tube-station - Screenshot Taken from The Exit 8 Game - Man cut out as png by Blake Taylor on Adobe Express|
 
 ## References
 
