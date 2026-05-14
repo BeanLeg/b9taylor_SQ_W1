@@ -2,193 +2,259 @@
 // Side Quest Week 1: Exit 8
 // ============================================================
 
-let exit8Img;
+/*
+ * Exit 8 - Static Image in p5.js
+ *
+ * This sketch creates a static image inspired by the game "Exit 8,"
+ * focusing on a large central '8' and surrounding eyes, all composed of basic shapes.
+ * It uses a liminal, underground Japanese subway aesthetic, featuring tiled walls
+ * and anomalies like distorted signs.
+ */
 
-// ------------------------------------------------------------
-// preload()
-// Runs once before setup(). Always load images and sounds here
-// so they are ready before the sketch tries to use them.
-// If you load images inside setup() they may not appear.
-// ------------------------------------------------------------
-function preload() {
-  // loadImage() takes a file path relative to index.html
-  // The image is stored in the variable so we can use it later
-  exit8Img = loadImage("assets/images/exit8.png");
-}
-
-// ------------------------------------------------------------
-// setup()
-// Runs once at the very start of the sketch.
-// Use it to set up your canvas and draw things that
-// only need to appear once (not animated).
-// ------------------------------------------------------------
 function setup() {
-  // createCanvas(width, height) sets the size of your canvas in pixels
-  createCanvas(800, 450);
+  // Create a canvas for the static image.
+  createCanvas(600, 800);
+  // Set the background to an underground tiled passage style.
+  drawBackWall();
+  drawCeiling();
+  drawFloor();
+  drawWalls();
+  drawSign(300, 100);
+  image(creepyman.png, 100, 100);
+}
 
-  // background() fills the canvas with a colour
-  // A single number = greyscale (0 is black, 255 is white)
-  background(30);
+function draw() {}
 
-  // ----------------------------------------------------------
-  // SECTION 1: TEXT
-  // ----------------------------------------------------------
+function mouseClicked() {
+  drawEye();
+}
 
-  // fill() sets the colour used for shapes AND text
-  // Three numbers = red, green, blue (each 0–255)
-  fill(255, 255, 255); // white
+function drawSign(x, y) {
+  rectMode(CENTER);
 
-  // textAlign() controls how text is anchored to its x position
-  // CENTER means the x coordinate is the middle of the text
-  textAlign(CENTER);
-
-  // textSize can be changed at any point — it applies to text drawn after it
-  textSize(14);
-
-  // width and height are built-in p5.js variables that
-  // always hold the canvas width and height
-  fill(180);
-  text("Image loaded from assets/images/", width / 4, 65);
-  text("Drawn using p5.js shapes", (width / 4) * 3, 65);
-
-  // ----------------------------------------------------------
-  // SECTION 2: DISPLAYING AN IMAGE
-  // ----------------------------------------------------------
-
-  // image(img, x, y, width, height) draws a loaded image
-  // x and y are the TOP-LEFT corner of the image
-  // The last two arguments resize the image to fit that space
-  image(exit8Img, 50, 85, 300, 300);
-
-  // ----------------------------------------------------------
-  // SECTION 3: DRAWING SHAPES (a controller made of shapes!)
-  // ----------------------------------------------------------
-  // All shapes are drawn relative to an origin point (originX, originY)
-  // so the whole drawing can be moved by changing those two values.
-
-  // originX and originY act as the anchor point for the whole drawing.
-  // Changing these two values moves the entire controller at once —
-  // a useful habit for keeping drawings easy to reposition.
-  let originX = 450; // left edge of the shape controller
-  let originY = 85; // top edge of the shape controller
-
-  // --- Controller body ---
-  // stroke() sets the outline colour — stroke(r,g,b) or a single greyscale value
-  // strokeWeight() sets how thick the outline is in pixels
-  // fill() sets the inside colour of the shape
-  stroke(80);
+  // Hanging posts (drawn first to appear behind the sign)
+  push();
+  fill(200); // 200 colored (light gray)
+  stroke(150); // Slightly darker outline for depth
   strokeWeight(2);
-  fill(210);
+  // Left post: x - 150, centered higher up to act as a hanger
+  rect(x - 150, y - 125, 15, 200);
+  // Right post: x + 150
+  rect(x + 150, y - 125, 15, 200);
+  pop();
 
-  // rect(x, y, width, height, cornerRadius)
-  // x, y = TOP-LEFT corner of the rectangle
-  // The last argument rounds all four corners by that many pixels
-  rect(originX, originY + 15, 300, 200, 40);
-
-  // --- Centre touchpad area ---
-  fill(170);
-  rect(originX + 95, originY + 65, 110, 70, 8);
-
-  // --- Left thumbstick ---
-  // ellipse(x, y, width, height)
-  // Unlike rect, x and y are the CENTRE of the ellipse — not the top-left corner
-  // Two layered ellipses (a larger outer ring + smaller inner cap) make a thumbstick
-  fill(60);
-  ellipse(originX + 65, originY + 165, 64, 64); // outer ring
-  fill(40);
-  ellipse(originX + 65, originY + 165, 36, 36); // inner cap
-
-  // --- Right thumbstick ---
-  fill(60);
-  ellipse(originX + 235, originY + 165, 64, 64);
-  fill(40);
-  ellipse(originX + 235, originY + 165, 36, 36);
-
-  // --- D-pad (two rectangles overlapping in a + shape) ---
-  // Note: these coordinates are hardcoded rather than using originX/originY
-  // because the D-pad needed to be positioned precisely on the controller body.
-  fill(50);
-  noStroke();
-  rect(482, 142.5, 28, 68, 4); // vertical bar
-  rect(482 - 18, 142.5 + 18, 64, 28, 4); // horizontal bar — offset to stay centred
-
-  // --- Face buttons ---
-  // Four circles arranged in a diamond: top, left, right, bottom
-  // Each has a different fill colour set before drawing it
-
-  fill(230, 200, 0); // yellow — top
-  ellipse(originX + 248, originY + 68, 24, 24);
-
-  fill(30, 100, 220); // blue — left
-  ellipse(originX + 224, originY + 92, 24, 24);
-
-  fill(200, 30, 30); // red — right
-  ellipse(originX + 272, originY + 92, 24, 24);
-
-  fill(30, 180, 60); // green — bottom
-  ellipse(originX + 248, originY + 116, 24, 24);
-
-  // --- Bumpers (rectangular buttons along the top edge) ---
-  stroke(80);
-  strokeWeight(2);
-  fill(190);
-  rect(originX + 18, originY, 110, 26, 10); // left bumper
-  rect(originX + 172, originY, 110, 26, 10); // right bumper
-
-  // --- Small menu buttons (centre of controller) ---
-  fill(136);
-  noStroke();
-  rect(originX + 118, originY + 45, 20, 14, 3); // left menu button
-  rect(originX + 162, originY + 45, 20, 14, 3); // right menu button
-
-  // --- Labels under each controller ---
-  noStroke();
-  fill(180);
-  textSize(13);
-  textAlign(CENTER);
-  text("exit8.png", originX - 150, originY + 295);
-  text("drawn with shapes", originX + 150, originY + 295);
-
-  // --- Dividing line between the two controllers ---
-  stroke(80);
+  // Main Sign Box
+  fill(255, 255, 0);
+  strokeWeight(5);
+  stroke(200);
+  rect(x, y, 400, 100);
   strokeWeight(1);
-  line(width / 2, 70, width / 2, 400);
-}
 
-// ------------------------------------------------------------
-// draw()
-// Runs repeatedly in a loop after setup() finishes.
-// Anything you want to animate or update goes here.
-// This sketch has nothing to animate, so draw() is empty.
-// ------------------------------------------------------------
-function draw() {
-  // Nothing here for now — everything is drawn once in setup()
-}
-
-// ------------------------------------------------------------
-// mousePressed()
-// A built-in p5.js event function.
-// Automatically called once every time the mouse is clicked.
-// mouseX and mouseY hold the current mouse position.
-// ------------------------------------------------------------
-function mousePressed() {
-  // Draw a random-coloured circle wherever the user clicks
-  fill(random(255), random(255), random(255));
+  // Big bold arrow pointing up (Left side)
+  push();
+  fill(0);
   noStroke();
-  circle(mouseX, mouseY, 40);
+  let ax = x - 70; // X center of the arrow
+  let ay = y; // Y center of the arrow
+  beginShape();
+  vertex(ax, ay - 33); // Top tip
+  vertex(ax - 25, ay + 5); // Left wing
+  vertex(ax - 15, ay + 5); // Inner left lip
+  vertex(ax - 5, ay + -13); // Inner left corner
+  vertex(ax - 5, ay + 35); // Bottom left
+  vertex(ax + 5, ay + 35); // Bottom right
+  vertex(ax + 5, ay + -13); // Inner right corner
+  vertex(ax + 15, ay + 5); // Inner right lip
+  vertex(ax + 25, ay + 5); // Right wing
+  endShape(CLOSE);
+  pop();
+
+  // Text (Center)
+  textAlign(CENTER);
+  stroke(0);
+  fill(0);
+  textSize(30);
+  text("出口", x, y);
+  textSize(20);
+  text("Exit", x - 10, y + 25);
+
+  // Large 8 (Right side)
+  push();
+  textAlign(CENTER, CENTER);
+  fill(0);
+  stroke(0);
+  strokeWeight(3); // Makes the 8 extra bold
+  textSize(90);
+  text("8", x + 70, y + 5);
+  pop();
 }
 
-// ------------------------------------------------------------
-// keyPressed()
-// A built-in p5.js event function.
-// Automatically called once every time a key is pressed.
-// The key variable holds the character that was pressed.
-// ------------------------------------------------------------
-function keyPressed() {
-  // Press "k" to log the current mouse position to the Chrome console.
-  // This is a handy debug tool — use it to find coordinates when
-  // placing shapes or images on the canvas.
-  if (key === "k") {
-    console.log("Mouse X:", mouseX, "Mouse Y:", mouseY);
+/**
+ * Draws an underground tiled wall background.
+ */
+function drawBackWall() {
+  background(220); // Dark, industrial color for the main tunnel.
+
+  // Draw wall tiles (square grid).
+  stroke(60, 60, 60);
+  strokeWeight(1);
+  noFill();
+  let tileSize = 10;
+  for (let x = 0; x < width; x += tileSize) {
+    for (let y = 0; y < height; y += tileSize) {
+      rect(x, y, tileSize, tileSize);
+    }
   }
+}
+
+function drawEye() {
+  let anomalyX = mouseX;
+  let anomalyY = mouseY;
+  let anomalyD = 40;
+
+  fill(255); // White of the eye
+  strokeWeight(1);
+  stroke(255, 0, 0);
+  ellipse(anomalyX, anomalyY, anomalyD * 1.5, anomalyD);
+
+  noStroke();
+  fill(0); // Pupil
+  ellipse(anomalyX, anomalyY, anomalyD, anomalyD);
+
+  fill(255); // Reflection
+  ellipse(
+    anomalyX - anomalyD * 0.15,
+    anomalyY - anomalyD * 0.15,
+    anomalyD * 0.2,
+    anomalyD * 0.2,
+  );
+}
+
+function drawCeiling() {
+  push();
+  // Light grey color for the ceiling
+  fill(180);
+  stroke(150); // Slightly darker border for the edges
+  strokeWeight(2);
+
+  // Define the coordinates for the upside-down trapezoid
+  // quad(x1, y1, x2, y2, x3, y3, x4, y4);
+  let topLeftX = 0;
+  let topLeftY = 0;
+
+  let topRightX = width;
+  let topRightY = 0;
+
+  // Adjust these to change the depth/perspective of the ceiling
+  let ceilingDepthY = 325;
+  let bottomRightX = width * 0.6;
+  let bottomLeftX = width * 0.4;
+
+  quad(
+    topLeftX,
+    topLeftY, // Top-left corner
+    topRightX,
+    topRightY, // Top-right corner
+    bottomRightX,
+    ceilingDepthY, // Bottom-right corner (narrower, lower down)
+    bottomLeftX,
+    ceilingDepthY, // Bottom-left corner (narrower, lower down)
+  );
+  pop();
+}
+
+function drawFloor() {
+  push();
+  // Slightly darker grey color for the floor to contrast with the ceiling
+  fill(235);
+  stroke(150);
+  strokeWeight(2);
+
+  // Define the bottom corners of the canvas
+  let bottomLeftX = 0;
+  let bottomLeftY = height;
+
+  let bottomRightX = width;
+  let bottomRightY = height;
+
+  // Set the depth of the floor (how high up the screen it goes)
+  // You can match the 300 from the ceiling, or adjust it based on your canvas height
+  let floorDepthY = height - 320;
+
+  // Match the perspective angles of the ceiling
+  let topRightX = width * 0.6;
+  let topLeftX = width * 0.4;
+
+  // quad(x1, y1, x2, y2, x3, y3, x4, y4);
+  quad(
+    bottomLeftX,
+    bottomLeftY, // Bottom-left corner
+    bottomRightX,
+    bottomRightY, // Bottom-right corner
+    topRightX,
+    floorDepthY, // Top-right corner (narrower, higher up)
+    topLeftX,
+    floorDepthY, // Top-left corner (narrower, higher up)
+  );
+
+  pop();
+}
+
+function drawWalls() {
+  push();
+  fill(240); // White walls
+  stroke(20); // Black for tile grout
+  strokeWeight(1);
+
+  // Perspective anchor points (matching your ceiling and floor)
+  let backLeftX = width * 0.4;
+  let backRightX = width * 0.6;
+  let backTopY = 300;
+  let backBottomY = height - 300;
+
+  // 1. Draw the base trapezoids (quads) for both walls
+  // Left Wall
+  quad(0, 0, backLeftX, backTopY, backLeftX, backBottomY, 0, height);
+  // Right Wall
+  quad(width, 0, backRightX, backTopY, backRightX, backBottomY, width, height);
+
+  // 2. Draw horizontal lines (Radiating from the vanishing point)
+  let numRows = 12; // Lowered this to make the vertical gaps larger (taller tiles)
+
+  for (let i = 0; i <= numRows; i++) {
+    // Front edge Y coordinates (0 to height)
+    let frontY = map(i, 0, numRows, 0, height);
+    // Back edge Y coordinates (compressed to the back wall)
+    let backY = map(i, 0, numRows, backTopY, backBottomY);
+
+    // Left wall lines
+    line(0, frontY, backLeftX, backY);
+    // Right wall lines
+    line(width, frontY, backRightX, backY);
+  }
+
+  // 3. Draw vertical lines (Compressing towards the back for 3D depth)
+  let numCols = 12; // Increased this to shorten the horizontal gaps (narrower tiles)
+
+  for (let i = 1; i < numCols; i++) {
+    // t goes evenly from 0 (front) to 1 (back)
+    let t = i / numCols;
+
+    // We use a math curve to squish the lines together as t gets closer to 1
+    let depthT = 1 - pow(1 - t, 2);
+
+    // Left Wall vertical lines
+    let leftX = map(depthT, 0, 1, 0, backLeftX);
+    let leftTopY = map(depthT, 0, 1, 0, backTopY);
+    let leftBottomY = map(depthT, 0, 1, height, backBottomY);
+    line(leftX, leftTopY, leftX, leftBottomY);
+
+    // Right Wall vertical lines
+    let rightX = map(depthT, 0, 1, width, backRightX);
+    let rightTopY = map(depthT, 0, 1, 0, backTopY);
+    let rightBottomY = map(depthT, 0, 1, height, backBottomY);
+    line(rightX, rightTopY, rightX, rightBottomY);
+  }
+
+  pop();
 }
