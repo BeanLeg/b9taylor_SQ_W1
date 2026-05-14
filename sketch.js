@@ -2,15 +2,20 @@
 // Side Quest Week 1: Exit 8
 // ============================================================
 
-/*
- * Exit 8 - Static Image in p5.js
- *
- * This sketch creates a static image inspired by the game "Exit 8,"
- * focusing on a large central '8' and surrounding eyes, all composed of basic shapes.
- * It uses a liminal, underground Japanese subway aesthetic, featuring tiled walls
- * and anomalies like distorted signs.
- */
+let creepyman;
+let posterX = 25;
+let posterY = 225;
 
+/**
+ * Preloads assets before the sketch starts.
+ */
+function preload() {
+  creepyman = loadImage("assets/images/creepyman.png");
+}
+
+/**
+ * Sets up the canvas and draws the initial static scene.
+ */
 function setup() {
   // Create a canvas for the static image.
   createCanvas(600, 800);
@@ -19,16 +24,29 @@ function setup() {
   drawCeiling();
   drawFloor();
   drawWalls();
+  drawPosters(posterX, posterY);
   drawSign(300, 100);
-  //image(creepyman.png, 100, 100);
+  imageMode(CENTER);
+  image(creepyman, width / 2, 450, 1200, 1200);
 }
 
+/**
+ * The main draw loop (empty for static image).
+ */
 function draw() {}
 
+/**
+ * Draws an eye at the mouse click position when clicked.
+ */
 function mouseClicked() {
   drawEye();
 }
 
+/**
+ * Draws the central exit sign with posts, arrow, text, and the large '8'.
+ * @param {number} x - The x-coordinate of the sign center.
+ * @param {number} y - The y-coordinate of the sign center.
+ */
 function drawSign(x, y) {
   rectMode(CENTER);
 
@@ -107,6 +125,9 @@ function drawBackWall() {
   }
 }
 
+/**
+ * Draws an eye anomaly at the mouse click position.
+ */
 function drawEye() {
   let anomalyX = mouseX;
   let anomalyY = mouseY;
@@ -130,6 +151,9 @@ function drawEye() {
   );
 }
 
+/**
+ * Draws the ceiling as an upside-down trapezoid for perspective.
+ */
 function drawCeiling() {
   push();
   // Light grey color for the ceiling
@@ -163,6 +187,9 @@ function drawCeiling() {
   pop();
 }
 
+/**
+ * Draws the floor as a trapezoid for perspective, contrasting the ceiling.
+ */
 function drawFloor() {
   push();
   // Slightly darker grey color for the floor to contrast with the ceiling
@@ -200,6 +227,9 @@ function drawFloor() {
   pop();
 }
 
+/**
+ * Draws the left and right walls with perspective lines for 3D depth.
+ */
 function drawWalls() {
   push();
   fill(240); // White walls
@@ -255,6 +285,49 @@ function drawWalls() {
     let rightBottomY = map(depthT, 0, 1, height, backBottomY);
     line(rightX, rightTopY, rightX, rightBottomY);
   }
+
+  pop();
+}
+
+/**
+ * Draws two posters on the left wall at the specified position.
+ * @param {number} x - The x-coordinate for the first poster.
+ * @param {number} y - The y-coordinate for the posters.
+ */
+function drawPosters(x, y) {
+  push();
+  noStroke();
+
+  let posterWidth = 100;
+  let posterHeight = 300;
+  let gap = 20;
+
+  // First poster on the left wall.
+  fill(254, 83, 77);
+  quad(
+    x,
+    y,
+    x + posterWidth,
+    y + 45,
+    x + posterWidth,
+    y + posterHeight - 40,
+    x,
+    y + posterHeight,
+  );
+
+  // Second poster to the right of the first.
+  let secondX = x + posterWidth + gap;
+  fill(20, 158, 200);
+  quad(
+    secondX,
+    y + 50,
+    secondX + posterWidth / 2,
+    y + 90,
+    secondX + posterWidth / 2,
+    y + posterHeight - 75,
+    secondX,
+    y + posterHeight - 50,
+  );
 
   pop();
 }
