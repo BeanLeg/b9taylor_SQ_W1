@@ -1,4 +1,4 @@
-# Side Quest Week 1: Exit 8 - He's Watching You
+# Side Quest Week 1: Exit 8 - You're Being Watched
 
 ## Setup and Interaction Instructions
 
