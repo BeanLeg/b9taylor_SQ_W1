@@ -20,7 +20,7 @@ function setup() {
   drawFloor();
   drawWalls();
   drawSign(300, 100);
-  image(creepyman.png, 100, 100);
+  //image(creepyman.png, 100, 100);
 }
 
 function draw() {}
