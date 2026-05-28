@@ -12,9 +12,10 @@ To play via GitHub Pages, visit the link provided on the submission page.
 
 ## Assets
 
-| File | Source |
-| `creepyman.png` | https://www.rockpapershotgun.com/the-exit-8-perfectly-captures-the-surreal-horror-of-navigating-a-busy-tube-station - Screenshot Taken from The Exit 8 Game - Man cut out as png by Blake Taylor on Adobe Express|
+File | Source
+
+creepyman.png | https://www.rockpapershotgun.com/the-exit-8-perfectly-captures-the-surreal-horror-of-navigating-a-busy-tube-station [1]
 
 ## References
 
-N/A
+[1] Ed Thorn. 2024. The Exit 8 perfectly captures the surreal horror of navigating a busy tube station, Rock Paper Shotgun/Kotake Create. https://www.rockpapershotgun.com/the-exit-8-perfectly-captures-the-surreal-horror-of-navigating-a-busy-tube-station
