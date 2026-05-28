@@ -1,4 +1,4 @@
-# Side Quest Week 1: Exit 8 - He's Watching You
+# Side Quest Week 1: Exit 8 - You're Being Watched
 
 ## Setup and Interaction Instructions
 
@@ -12,6 +12,7 @@ To play via GitHub Pages, visit the link provided on the submission page.
 
 ## Assets
 
+<<<<<<< HEAD
 File | Source
 
 creepyman.png | https://www.rockpapershotgun.com/the-exit-8-perfectly-captures-the-surreal-horror-of-navigating-a-busy-tube-station [1]
