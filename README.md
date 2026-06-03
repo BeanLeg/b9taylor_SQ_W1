@@ -12,9 +12,9 @@ To play via GitHub Pages, visit the link provided on the submission page.
 
 ## Assets
 
-| File          | Source                                                                                                                  |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| creepyman.png | https://www.rockpapershotgun.com/the-exit-8-perfectly-captures-the-surreal-horror-of-navigating-a-busy-tube-station [1] |
+| File                          | Source                                                                                                                  |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `assets/images/creepyman.png` | https://www.rockpapershotgun.com/the-exit-8-perfectly-captures-the-surreal-horror-of-navigating-a-busy-tube-station [1] |
 
 ## References
 
